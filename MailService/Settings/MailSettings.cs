@@ -1,4 +1,4 @@
-﻿namespace SendEmail.Settings
+﻿namespace MailService.Settings
 {
     public class MailSettings
     {

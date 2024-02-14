@@ -31,3 +31,8 @@ C:\Users\CityGIS\Desktop\C#\ReportMailClient\MailService\obj\Debug\net7.0\refint
 C:\Users\CityGIS\Desktop\C#\ReportMailClient\MailService\obj\Debug\net7.0\MailService.pdb
 C:\Users\CityGIS\Desktop\C#\ReportMailClient\MailService\obj\Debug\net7.0\MailService.genruntimeconfig.cache
 C:\Users\CityGIS\Desktop\C#\ReportMailClient\MailService\obj\Debug\net7.0\ref\MailService.dll
+C:\Users\CityGIS\Desktop\C#\ReportMailClient\MailService\bin\Debug\net7.0\BouncyCastle.Cryptography.dll
+C:\Users\CityGIS\Desktop\C#\ReportMailClient\MailService\bin\Debug\net7.0\MailKit.dll
+C:\Users\CityGIS\Desktop\C#\ReportMailClient\MailService\bin\Debug\net7.0\MimeKit.dll
+C:\Users\CityGIS\Desktop\C#\ReportMailClient\MailService\bin\Debug\net7.0\System.Security.Cryptography.Pkcs.dll
+C:\Users\CityGIS\Desktop\C#\ReportMailClient\MailService\bin\Debug\net7.0\runtimes\win\lib\net7.0\System.Security.Cryptography.Pkcs.dll

@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using System.Text.Json;
 
-namespace SendEmail.Models
+namespace MailService.Models
 {
     public class MailRequest
     {
@@ -9,16 +9,16 @@ namespace SendEmail.Models
         public string ToDisplayName { get; set; }
         public string FromDisplayName { get; set; }
 
-        //public string FromMail { get; set; }
+        public string FromMail { get; set; }
 
         public string Subject { get; set; }
 
         public string Body { get; set; }
 
-        //public IFormFile? Attachments { get; set; }
+        public IFormFileCollection? Attachments { get; set; }
         
-        public string JsonData { get; set; }
+        //public string JsonData { get; set; }
 
-        public JsonElement GetJsonDataAsJsonElement() => JsonDocument.Parse(JsonData).RootElement;
+        //public JsonElement GetJsonDataAsJsonElement() => JsonDocument.Parse(JsonData).RootElement;
     }
 }
