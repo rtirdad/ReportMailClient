@@ -1,0 +1,14 @@
+C:\Users\CityGIS\Desktop\C#\ReportMailClient\ReportMailClient\obj\Debug\net7.0\ReportMailClient.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\CityGIS\Desktop\C#\ReportMailClient\ReportMailClient\obj\Debug\net7.0\ReportMailClient.AssemblyInfoInputs.cache
+C:\Users\CityGIS\Desktop\C#\ReportMailClient\ReportMailClient\obj\Debug\net7.0\ReportMailClient.AssemblyInfo.cs
+C:\Users\CityGIS\Desktop\C#\ReportMailClient\ReportMailClient\obj\Debug\net7.0\ReportMailClient.csproj.CoreCompileInputs.cache
+C:\Users\CityGIS\Desktop\C#\ReportMailClient\ReportMailClient\bin\Debug\net7.0\ReportMailClient.exe
+C:\Users\CityGIS\Desktop\C#\ReportMailClient\ReportMailClient\bin\Debug\net7.0\ReportMailClient.deps.json
+C:\Users\CityGIS\Desktop\C#\ReportMailClient\ReportMailClient\bin\Debug\net7.0\ReportMailClient.runtimeconfig.json
+C:\Users\CityGIS\Desktop\C#\ReportMailClient\ReportMailClient\bin\Debug\net7.0\ReportMailClient.dll
+C:\Users\CityGIS\Desktop\C#\ReportMailClient\ReportMailClient\bin\Debug\net7.0\ReportMailClient.pdb
+C:\Users\CityGIS\Desktop\C#\ReportMailClient\ReportMailClient\obj\Debug\net7.0\ReportMailClient.dll
+C:\Users\CityGIS\Desktop\C#\ReportMailClient\ReportMailClient\obj\Debug\net7.0\refint\ReportMailClient.dll
+C:\Users\CityGIS\Desktop\C#\ReportMailClient\ReportMailClient\obj\Debug\net7.0\ReportMailClient.pdb
+C:\Users\CityGIS\Desktop\C#\ReportMailClient\ReportMailClient\obj\Debug\net7.0\ReportMailClient.genruntimeconfig.cache
+C:\Users\CityGIS\Desktop\C#\ReportMailClient\ReportMailClient\obj\Debug\net7.0\ref\ReportMailClient.dll
