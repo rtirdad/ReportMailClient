@@ -1,0 +1,14 @@
+{
+  "format": "Pdf",
+  "template":"Letter1",
+  "data": 
+    { 
+      "client": {
+        "FirstName": "John",
+        "LastName": "Smith",
+        "PostCode": "1234AB",
+        "CompanyName": "Apple",
+        "Address": "Apple Street 123",
+        "Title": "Mr."
+      }}
+}

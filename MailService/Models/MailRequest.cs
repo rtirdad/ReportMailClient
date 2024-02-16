@@ -15,7 +15,7 @@ namespace MailService.Models
 
         public string Body { get; set; }
 
-        public IFormFileCollection? Attachments { get; set; }
+        //public IFormFileCollection? Attachments { get; set; }
         
         //public string JsonData { get; set; }
 
