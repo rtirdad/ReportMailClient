@@ -1,14 +1,8 @@
 {
-  "format": "Pdf",
-  "template":"Letter1",
-  "data": 
-    { 
-      "client": {
-        "FirstName": "John",
-        "LastName": "Smith",
-        "PostCode": "1234AB",
-        "CompanyName": "Apple",
-        "Address": "Apple Street 123",
-        "Title": "Mr."
-      }}
+  "toEmail": "Ronat20003@gmail.com",
+  "toDisplayName": "Rona",
+  "fromDisplayName": "R",
+  "fromMail": "ronat20003@gmail.com",
+  "subject": "Test to see if email sends",
+  "body": "Hiii"
 }
