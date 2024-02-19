@@ -10,7 +10,7 @@ class Program
     static async Task Main(string[] args)
     {
         // 1. Retrieve the report as an attachment
-        var reportClient = new HttpClient();
+        //var reportClient = new HttpClient();
         /*var reportRequest = new
         {
             format = "Pdf",
@@ -28,8 +28,8 @@ class Program
                 }
             }
         };*/
-        var result = await reportClient.PostAsJsonAsync("https://localhost:7251/report", JsonContent.Create(@"{
-          ""format"": ""Pdf"",
+        /*var result = await reportClient.PostAsJsonAsync("https://localhost:7251/report", JsonContent.Create(@"{
+          ""format"": ""pdf"",
           ""template"":""Letter1"",
           ""data"": 
             { 
@@ -56,7 +56,7 @@ class Program
         {
             Console.WriteLine($"Failed to generate report. Status code: {result.StatusCode}");
             return;
-        }
+        }*/
 
         // 2. Send email with the report attachment
         var emailClient = new HttpClient();
@@ -71,7 +71,7 @@ class Program
         };
 
         var formData = new MultipartFormDataContent();
-        formData.Add(new ByteArrayContent(attachment), "attachment", "report.pdf");
+        //formData.Add(new ByteArrayContent(attachment), "attachment", "report.pdf");
         formData.Add(JsonContent.Create(mailRequest), "mailRequest");
 
         var mailResponse = await emailClient.PostAsync("https://localhost:7154/Email/Send", formData);
