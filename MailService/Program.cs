@@ -9,7 +9,6 @@ using MailService.Settings;
 
 var builder = WebApplication.CreateBuilder(args);
 
-
 // Add services to the container.
 builder.Services.AddControllers();
 builder.Services.AddTransient<IMailService,MailService.Services.MailService>();
@@ -49,7 +48,6 @@ app.MapPost("Email/Send", async (IMailService mailService, MailRequest request) 
         app.Logger.LogError("An error occurred, email send unsuccessfully :(");
         return Results.StatusCode(StatusCodes.Status500InternalServerError);
     }
-
 })
 
 .WithName("Report")

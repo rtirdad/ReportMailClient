@@ -34,7 +34,6 @@ namespace MailService.Services
 
             if (!string.IsNullOrEmpty(mailRequest.AttachmentPath) && File.Exists(mailRequest.AttachmentPath))
             {
-
                 var attachmentContent = new MimePart("application", "pdf")
                 {
                     Content = new MimeContent(File.OpenRead(mailRequest.AttachmentPath), ContentEncoding.Default),
