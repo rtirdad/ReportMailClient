@@ -1,18 +1,14 @@
-﻿using GemBox.Document;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.IO;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Text.Json;
 using System.Threading.Tasks;
 
-ComponentInfo.SetLicense("FREE-LIMITED-KEY");
-
 var reportClient = new HttpClient();
 var JsonData = @"
 {
-  ""format"": ""html"",
+  ""format"": ""pdf"",
   ""template"": ""Letter1"",
   ""data"": 
   { 
@@ -30,7 +26,16 @@ var reportJsonContent = JsonDocument.Parse(JsonData);
 
 var reportResult = await reportClient.PostAsJsonAsync("https://localhost:7251/report", reportJsonContent);
 
-string reportFilePath = Path.GetTempFileName();
+string reportFileName = "report.html";
+if (reportResult.IsSuccessStatusCode)
+{
+    if (JsonData.Contains("\"format\": \"pdf\""))
+    {
+        reportFileName = "report.pdf";
+    }
+}
+
+string reportFilePath = Path.Combine(Path.GetTempPath(), reportFileName);
 using (var stream = await reportResult.Content.ReadAsStreamAsync())
 using (var fileStream = File.Create(reportFilePath))
 {
@@ -38,6 +43,17 @@ using (var fileStream = File.Create(reportFilePath))
 }
 
 var emailClient = new HttpClient();
+/*var JsonEmailData = @"
+{
+  ""toEmail"": ""ronat20003@gmail.com"",
+  ""toDisplayName"": ""Rona"",
+  ""fromDisplayName"": ""R"",
+  ""fromMail"": ""ronat20003@gmail.com"",
+  ""subject"": ""Test to see if email sends"",
+  ""body"": ""Hiii"",
+  ""attachmentPath"": """ + reportFilePath + @"""
+}";*/
+
 var emailContent = new
 {
     toEmail = "ronat20003@gmail.com",
@@ -48,8 +64,9 @@ var emailContent = new
     body = "Email with attachment",
     attachmentPath = reportFilePath
 };
+//var emailContent = JsonDocument.Parse(JsonEmailData);
 
-var emailResult = await emailClient.PostAsJsonAsync("https://localhost:7154/Email/SendWithAttachment", emailContent);
+var emailResult = await emailClient.PostAsJsonAsync("https://localhost:7154/Email/Send", emailContent);
 if (emailResult.IsSuccessStatusCode)
 {
     Console.WriteLine("Email sent successfully!");
@@ -58,3 +75,4 @@ else
 {
     Console.WriteLine("Failed to send email.");
 }
+

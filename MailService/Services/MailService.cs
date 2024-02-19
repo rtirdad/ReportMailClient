@@ -34,7 +34,15 @@ namespace MailService.Services
 
             if (!string.IsNullOrEmpty(mailRequest.AttachmentPath) && File.Exists(mailRequest.AttachmentPath))
             {
-                builder.Attachments.Add(mailRequest.AttachmentPath);
+
+                var attachmentContent = new MimePart("application", "pdf")
+                {
+                    Content = new MimeContent(File.OpenRead(mailRequest.AttachmentPath), ContentEncoding.Default),
+                    ContentDisposition = new ContentDisposition(ContentDisposition.Attachment),
+                    ContentTransferEncoding = ContentEncoding.Base64,
+                    FileName = Path.GetFileName(mailRequest.AttachmentPath)
+                };
+                builder.Attachments.Add(attachmentContent);
             }
 
             email.Body = builder.ToMessageBody();
@@ -47,3 +55,5 @@ namespace MailService.Services
         }
     }
 }
+
+

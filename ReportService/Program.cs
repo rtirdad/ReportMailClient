@@ -86,7 +86,7 @@ app.MapPost("/report", (JsonDocument doc, HttpContext context) =>
     }
     else
     {
-        return Results.BadRequest("Unsupported format.");
+        return Results.BadRequest("the format that you have provided is not supported, try pdf or html.");
     }
 })
 .WithName("Report")
