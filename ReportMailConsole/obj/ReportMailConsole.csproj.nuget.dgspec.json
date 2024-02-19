@@ -44,6 +44,12 @@
       "frameworks": {
         "net7.0": {
           "targetAlias": "net7.0",
+          "dependencies": {
+            "GemBox.Document": {
+              "target": "Package",
+              "version": "[35.0.1659, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",

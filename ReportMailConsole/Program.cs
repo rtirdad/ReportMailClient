@@ -1,88 +1,52 @@
-﻿using System;
+﻿using GemBox.Document;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
 
-class Program
+//generate report
+var reportClient = new HttpClient();
+var reportJsonContent = new
 {
-    static async Task Main(string[] args)
+   Format: "pdf",
+   template:"Letter1",
+   data: 
     {
-        // 1. Retrieve the report as an attachment
-        //var reportClient = new HttpClient();
-        /*var reportRequest = new
-        {
-            format = "Pdf",
-            template = "Letter1",
-            data = new
-            {
-                client = new
-                {
-                    FirstName = "John",
-                    LastName = "Smith",
-                    PostCode = "1234AB",
-                    CompanyName = "Apple",
-                    Address = "Apple Street 123",
-                    Title = "Mr."
-                }
-            }
-        };*/
-        /*var result = await reportClient.PostAsJsonAsync("https://localhost:7251/report", JsonContent.Create(@"{
-          ""format"": ""pdf"",
-          ""template"":""Letter1"",
-          ""data"": 
-            { 
-              ""client"": {
-                ""FirstName"": ""John"",
-                ""LastName"": ""Smith"",
-                ""PostCode"": ""1234AB"",
-                ""CompanyName"": ""Apple"",
-                ""Address"": ""Apple Street 123"",
-                ""Title"": ""Mr.""
-              }}
-        }
-        "));
-
-        //var reportResponse = await reportClient.PostAsJsonAsync("https://localhost:7251/report", result);
-        byte[] attachment = null;
-
-        if (result.IsSuccessStatusCode)
-        {
-            attachment = await result.Content.ReadAsByteArrayAsync();
-            Console.WriteLine("report has been generated");
-        }
-        else
-        {
-            Console.WriteLine($"Failed to generate report. Status code: {result.StatusCode}");
-            return;
-        }*/
-
-        // 2. Send email with the report attachment
-        var emailClient = new HttpClient();
-        var mailRequest = new
-        {
-            ToEmail = "ronat20003@gmail.com",
-            ToDisplayName = "r",
-            FromDisplayName = "Your Name",
-            FromMail = "ronat20003@gmail.com",
-            Subject = "Report Attached",
-            Body = "Please find the attached report."
-        };
-
-        var formData = new MultipartFormDataContent();
-        //formData.Add(new ByteArrayContent(attachment), "attachment", "report.pdf");
-        formData.Add(JsonContent.Create(mailRequest), "mailRequest");
-
-        var mailResponse = await emailClient.PostAsync("https://localhost:7154/Email/Send", formData);
-
-        if (mailResponse.IsSuccessStatusCode)
-        {
-            Console.WriteLine("Email sent successfully!");
-        }
-        else
-        {
-            Console.WriteLine($"An error has occured when sending the email {mailResponse.StatusCode}");
-        }
-    }
+    client: {
+        FirstName: "John",
+        LastName: "Smith",
+        PostCode: "1234AB",
+        CompanyName: "Apple",
+        Address: "Apple Street 123",
+        Title: "Mr."
+      }
 }
+
+var reportResult = await reportClient.PostAsJsonAsync("https://localhost:7251/report", reportJsonContent)
+
+
+//Email can be sent succesfully 
+var emailClient = new HttpClient();
+var content = new
+{
+    toEmail = "Ronat20003@gmail.com",
+    toDisplayName = "Rona",
+    fromDisplayName = "R",
+    fromMail = "ronat20003@gmail.com",
+    subject = "console app email",
+    body = "Hiii"
+};
+
+var result = await emailClient.PostAsJsonAsync("https://localhost:7154/Email/Send", content);
+
+if (result.IsSuccessStatusCode)
+{
+    Console.WriteLine("Email sent successfully!");
+}
+else
+{
+    Console.WriteLine("Failed to send email.");
+}
+    
