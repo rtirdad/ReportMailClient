@@ -11,7 +11,7 @@ class Program
     {
         // 1. Retrieve the report as an attachment
         var reportClient = new HttpClient();
-        var reportRequest = new
+        /*var reportRequest = new
         {
             format = "Pdf",
             template = "Letter1",
@@ -27,18 +27,34 @@ class Program
                     Title = "Mr."
                 }
             }
-        };
+        };*/
+        var result = await reportClient.PostAsJsonAsync("https://localhost:7251/report", JsonContent.Create(@"{
+          ""format"": ""Pdf"",
+          ""template"":""Letter1"",
+          ""data"": 
+            { 
+              ""client"": {
+                ""FirstName"": ""John"",
+                ""LastName"": ""Smith"",
+                ""PostCode"": ""1234AB"",
+                ""CompanyName"": ""Apple"",
+                ""Address"": ""Apple Street 123"",
+                ""Title"": ""Mr.""
+              }}
+        }
+        "));
 
-        var reportResponse = await reportClient.PostAsJsonAsync("https://localhost:7251/report", reportRequest);
+        //var reportResponse = await reportClient.PostAsJsonAsync("https://localhost:7251/report", result);
         byte[] attachment = null;
 
-        if (reportResponse.IsSuccessStatusCode)
+        if (result.IsSuccessStatusCode)
         {
-            attachment = await reportResponse.Content.ReadAsByteArrayAsync();
+            attachment = await result.Content.ReadAsByteArrayAsync();
+            Console.WriteLine("report has been generated");
         }
         else
         {
-            Console.WriteLine($"Failed to generate report. Status code: {reportResponse.StatusCode}");
+            Console.WriteLine($"Failed to generate report. Status code: {result.StatusCode}");
             return;
         }
 
@@ -66,7 +82,7 @@ class Program
         }
         else
         {
-            Console.WriteLine($"Failed to send email. Status code: {mailResponse.StatusCode}");
+            Console.WriteLine($"An error has occured when sending the email {mailResponse.StatusCode}");
         }
     }
 }
