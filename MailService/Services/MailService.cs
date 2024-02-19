@@ -22,19 +22,24 @@ namespace MailService.Services
             _mailSettings = options.Value;
         }
 
-        public async Task SendEmailAsync(MailRequest mailrequest)
+        public async Task SendEmailAsync(MailRequest mailRequest)
         {
             var email = new MimeMessage();
-            email.From.Add(new MailboxAddress(mailrequest.FromDisplayName, mailrequest.FromMail));
-            //email.Sender = MailboxAddress.Parse(mailrequest.FromAppPassword);
-            email.To.Add(new MailboxAddress(mailrequest.ToDisplayName, mailrequest.ToEmail));
+            email.From.Add(new MailboxAddress(mailRequest.FromDisplayName, mailRequest.FromMail));
+            email.To.Add(new MailboxAddress(mailRequest.ToDisplayName, mailRequest.ToEmail));
+            email.Subject = mailRequest.Subject;
 
-            email.Subject = mailrequest.Subject;
             var builder = new BodyBuilder();
+            builder.HtmlBody = mailRequest.Body;
 
-            builder.HtmlBody = mailrequest.Body;
+            if (!string.IsNullOrEmpty(mailRequest.AttachmentPath) && File.Exists(mailRequest.AttachmentPath))
+            {
+                builder.Attachments.Add(mailRequest.AttachmentPath);
+            }
+
             email.Body = builder.ToMessageBody();
-            using var smtp = new MailKit.Net.Smtp.SmtpClient();
+
+            using var smtp = new SmtpClient();
             smtp.Connect(_mailSettings.Host, _mailSettings.Port, SecureSocketOptions.StartTls);
             smtp.Authenticate(_mailSettings.Mail, _mailSettings.Password);
             await smtp.SendAsync(email);

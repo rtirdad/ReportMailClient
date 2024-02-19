@@ -49,6 +49,7 @@ app.MapPost("Email/Send", async (IMailService mailService, MailRequest request) 
         app.Logger.LogError("An error occurred, email send unsuccessfully :(");
         return Results.StatusCode(StatusCodes.Status500InternalServerError);
     }
+
 })
 
 .WithName("Report")
