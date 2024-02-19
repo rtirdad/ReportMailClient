@@ -56,19 +56,40 @@ app.MapPost("/report", (JsonDocument doc, HttpContext context) =>
     document.Content.Replace(new Regex("{Date}", RegexOptions.IgnoreCase),
         DateTime.Today.ToLongDateString());
 
-    var pdfSaveOptions = new PdfSaveOptions() { ImageDpi = 220 };
+    if (docFormat == "pdf")
+    {
+        var pdfSaveOptions = new PdfSaveOptions() { ImageDpi = 220 };
 
-    using var pdfStream = new MemoryStream();
-    var memoryStream = new MemoryStream();
+        using var pdfStream = new MemoryStream();
+        var memoryStream = new MemoryStream();
 
-    pdfStream.CopyTo(memoryStream);
-    memoryStream.Position = 0;
+        pdfStream.CopyTo(memoryStream);
+        memoryStream.Position = 0;
 
-    document.Save(memoryStream, pdfSaveOptions);
+        document.Save(memoryStream, pdfSaveOptions);
 
-    return Results.File(memoryStream, "application/pdf", "report.pdf");
+        return Results.File(memoryStream, "application/pdf", "report.pdf");
+    }
+    else if (docFormat == "html")
+    {
+        var HTMLSaveOptions = new HtmlSaveOptions();
+
+        using var htmlStream = new MemoryStream();
+        var memoryStream = new MemoryStream();
+
+        htmlStream.CopyTo(memoryStream);
+        memoryStream.Position = 0;
+
+        document.Save(memoryStream, HTMLSaveOptions);
+
+        return Results.File(memoryStream, "text/html", "report.html");
+    }
+    else
+    {
+        return Results.BadRequest("the format that you have provided is not supported, try pdf or html.");
+    }
 })
-
 .WithName("Report")
 .WithOpenApi();
 app.Run();
+

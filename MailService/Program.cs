@@ -1,28 +1,28 @@
-using MailKit.Net.Smtp;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.Options;
-using MimeKit;
-using MailKit;
+using Microsoft.Extensions.Configuration;
+using MailService.Services;
+using MailService.Settings;
+using System.Text.RegularExpressions;
+using System.Text.Json;
+using MailService.Models;
 using MailService.Models;
 using MailService.Settings;
-using System.Net.Mail;
-using MimeKit.Text;
-using MailKit.Security;
 
 var builder = WebApplication.CreateBuilder(args);
 
+
 // Add services to the container.
+builder.Services.AddControllers();
+builder.Services.AddTransient<IMailService,MailService.Services.MailService>();
+builder.Services.Configure<MailSettings>(builder.Configuration.GetSection("MailSettings"));
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-// Register MailSettings
-//builder.Services.Configure<MailSettings>(builder.Configuration.GetSection("MailSettings"));
+builder.Services.AddCors(c =>
+{
+    c.AddPolicy("AllowOrigin", options => options.AllowAnyOrigin());
+});
 
-// Register MailRequest
-//builder.Services.AddSingleton<MailRequest>();
-builder.Services.AddTransient<MailRequest>();
-builder.Services.Configure<MailSettings>(builder.Configuration.GetSection("MailSettings"));
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -33,44 +33,25 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseAuthorization();
+app.MapControllers();
 
-app.MapPost("/SendMail", async ( MailSettings mailSettings, MailRequest mailrequest) =>
+app.MapPost("Email/Send", async (IMailService mailService, MailRequest request) =>
 {
-    var email = new MimeMessage();
-    email.From.Add(new MailboxAddress(mailrequest.FromDisplayName, mailrequest.FromMail));
-    //email.Sender = MailboxAddress.Parse(mailrequest.FromAppPassword);
-    email.To.Add(new MailboxAddress(mailrequest.ToDisplayName, mailrequest.ToEmail));
-
-    email.Subject = mailrequest.Subject;
-    var builder = new BodyBuilder();
-
-    if (mailrequest.Attachments != null)
+    try
     {
-        byte[] fileBytes;
-        foreach (var file in mailrequest.Attachments)
-        {
-            if (file.Length > 0)
-            {
-                using (var ms = new MemoryStream())
-                {
-                    file.CopyTo(ms);
-                    fileBytes = ms.ToArray();
-                }
-                builder.Attachments.Add(file.FileName, fileBytes, ContentType.Parse(file.ContentType));
-            }
-        }
+        await mailService.SendEmailAsync(request);
+        app.Logger.LogInformation("Email sent successfully :)");
+        return Results.Ok();
     }
-    builder.HtmlBody = mailrequest.Body;
-    email.Body = builder.ToMessageBody();
-    using var smtp = new MailKit.Net.Smtp.SmtpClient();
-    smtp.Connect(mailSettings.Host, mailSettings.Port, SecureSocketOptions.StartTls);
-    smtp.Authenticate(mailrequest.FromMail, mailSettings.Password);
-    await smtp.SendAsync(email);
-    smtp.Disconnect(true);
+    catch (Exception ex)
+    {
+        app.Logger.LogError("An error occurred, email send unsuccessfully :(");
+        return Results.StatusCode(StatusCodes.Status500InternalServerError);
+    }
 
 })
-.WithName("SendMail")
+
+.WithName("Report")
 .WithOpenApi();
-
 app.Run();
-

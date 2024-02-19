@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.34031.279
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReportMailClient", "ReportMailClient\ReportMailClient.csproj", "{4E1211F5-08CE-4D78-B8DD-B849B3267F84}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReportService", "ReportService\ReportService.csproj", "{27C9CF39-F4C2-4741-B727-D2099D456DAC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReportService", "ReportService\ReportService.csproj", "{27C9CF39-F4C2-4741-B727-D2099D456DAC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MailService", "MailService\MailService.csproj", "{4E4BF806-71B7-4FE0-82AC-EB5A0093C180}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MailService", "MailService\MailService.csproj", "{4E4BF806-71B7-4FE0-82AC-EB5A0093C180}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReportMailConsole", "ReportMailConsole\ReportMailConsole.csproj", "{2CB10E5A-12D7-4154-8CD2-32E78DCFC0B5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,10 +15,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{4E1211F5-08CE-4D78-B8DD-B849B3267F84}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4E1211F5-08CE-4D78-B8DD-B849B3267F84}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4E1211F5-08CE-4D78-B8DD-B849B3267F84}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4E1211F5-08CE-4D78-B8DD-B849B3267F84}.Release|Any CPU.Build.0 = Release|Any CPU
 		{27C9CF39-F4C2-4741-B727-D2099D456DAC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{27C9CF39-F4C2-4741-B727-D2099D456DAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{27C9CF39-F4C2-4741-B727-D2099D456DAC}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -27,6 +23,10 @@ Global
 		{4E4BF806-71B7-4FE0-82AC-EB5A0093C180}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4E4BF806-71B7-4FE0-82AC-EB5A0093C180}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4E4BF806-71B7-4FE0-82AC-EB5A0093C180}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2CB10E5A-12D7-4154-8CD2-32E78DCFC0B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2CB10E5A-12D7-4154-8CD2-32E78DCFC0B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2CB10E5A-12D7-4154-8CD2-32E78DCFC0B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2CB10E5A-12D7-4154-8CD2-32E78DCFC0B5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

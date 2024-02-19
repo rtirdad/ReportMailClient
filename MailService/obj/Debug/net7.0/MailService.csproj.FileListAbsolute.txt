@@ -36,3 +36,4 @@ C:\Users\CityGIS\Desktop\C#\ReportMailClient\MailService\bin\Debug\net7.0\MailKi
 C:\Users\CityGIS\Desktop\C#\ReportMailClient\MailService\bin\Debug\net7.0\MimeKit.dll
 C:\Users\CityGIS\Desktop\C#\ReportMailClient\MailService\bin\Debug\net7.0\System.Security.Cryptography.Pkcs.dll
 C:\Users\CityGIS\Desktop\C#\ReportMailClient\MailService\bin\Debug\net7.0\runtimes\win\lib\net7.0\System.Security.Cryptography.Pkcs.dll
+C:\Users\CityGIS\Desktop\C#\ReportMailClient\MailService\bin\Debug\net7.0\SampleMailData.json
