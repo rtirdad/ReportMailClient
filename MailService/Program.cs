@@ -4,8 +4,6 @@ using MailService.Settings;
 using System.Text.RegularExpressions;
 using System.Text.Json;
 using MailService.Models;
-using MailService.Models;
-using MailService.Settings;
 
 var builder = WebApplication.CreateBuilder(args);
 
