@@ -22,7 +22,6 @@ builder.Services.AddCors(c =>
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -43,7 +42,7 @@ app.MapPost("Email/Send", async (IMailService mailService, MailRequest request) 
     }
     catch (Exception ex)
     {
-        app.Logger.LogError("An error occurred, email send unsuccessfully :(");
+        app.Logger.LogError("An error occurred, email send unsuccessfully :(", ex);
         return Results.StatusCode(StatusCodes.Status500InternalServerError);
     }
 })

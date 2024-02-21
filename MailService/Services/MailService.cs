@@ -7,8 +7,6 @@ using MimeKit.Text;
 using MailKit.Security;
 using MailService.Models;
 using MailService.Settings;
-using MailService.Models;
-using MailService.Settings;
 using MailService.Services;
 
 namespace MailService.Services
