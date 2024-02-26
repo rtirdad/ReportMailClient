@@ -43,16 +43,6 @@ using (var fileStream = File.Create(reportFilePath))
 }
 
 var emailClient = new HttpClient();
-/*var JsonEmailData = @"
-{
-  ""toEmail"": ""ronat20003@gmail.com"",
-  ""toDisplayName"": ""Rona"",
-  ""fromDisplayName"": ""R"",
-  ""fromMail"": ""ronat20003@gmail.com"",
-  ""subject"": ""Test to see if email sends"",
-  ""body"": ""Hiii"",
-  ""attachmentPath"": """ + reportFilePath + @"""
-}";*/
 
 var emailContent = new
 {
@@ -64,7 +54,6 @@ var emailContent = new
     body = "Email with attachment",
     attachmentPath = reportFilePath
 };
-//var emailContent = JsonDocument.Parse(JsonEmailData);
 
 var emailResult = await emailClient.PostAsJsonAsync("https://localhost:7154/Email/Send", emailContent);
 if (emailResult.IsSuccessStatusCode)
