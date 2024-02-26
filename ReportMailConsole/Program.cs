@@ -55,13 +55,26 @@ var emailContent = new
     attachmentPath = reportFilePath
 };
 
+/*var jsonEmailContents = @"
+{
+  ""toEmail"": ""Ronat20003@gmail.com"",
+  ""toDisplayName"": ""Rona"",
+  ""fromDisplayName"": ""R"",
+  ""fromMail"": ""ronat20003@gmail.com"",
+  ""subject"": ""Test to see if email sends"",
+  ""body"": ""Hello!"",
+  ""attachmentPath"": ""\""reportFilePath\""
+    
+}";
+
+var emailContent = JsonDocument.Parse(jsonEmailContents);*/
 var emailResult = await emailClient.PostAsJsonAsync("https://localhost:7154/Email/Send", emailContent);
 if (emailResult.IsSuccessStatusCode)
 {
-    Console.WriteLine("Email sent successfully!");
+    Console.WriteLine("Email sent successfully! :)");
 }
 else
 {
-    Console.WriteLine("Failed to send email.");
+    Console.WriteLine($"There was a problem with sending the email. :( ({emailResult.StatusCode})");
 }
 
