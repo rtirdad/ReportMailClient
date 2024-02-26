@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 var reportClient = new HttpClient();
 var JsonData = @"
 {
-  ""format"": ""pdf"",
+  ""format"": ""html"",
   ""template"": ""Letter1"",
   ""data"": 
   { 
@@ -55,19 +55,6 @@ var emailContent = new
     attachmentPath = reportFilePath
 };
 
-/*var jsonEmailContents = @"
-{
-  ""toEmail"": ""Ronat20003@gmail.com"",
-  ""toDisplayName"": ""Rona"",
-  ""fromDisplayName"": ""R"",
-  ""fromMail"": ""ronat20003@gmail.com"",
-  ""subject"": ""Test to see if email sends"",
-  ""body"": ""Hello!"",
-  ""attachmentPath"": ""\""reportFilePath\""
-    
-}";
-
-var emailContent = JsonDocument.Parse(jsonEmailContents);*/
 var emailResult = await emailClient.PostAsJsonAsync("https://localhost:7154/Email/Send", emailContent);
 if (emailResult.IsSuccessStatusCode)
 {

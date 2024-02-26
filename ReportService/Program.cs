@@ -1,4 +1,5 @@
 using GemBox.Document;
+using System.Reflection.Metadata;
 using System.Text.Json;
 using System.Text.RegularExpressions;
 
@@ -56,40 +57,40 @@ app.MapPost("/report", (JsonDocument doc, HttpContext context) =>
     document.Content.Replace(new Regex("{Date}", RegexOptions.IgnoreCase),
         DateTime.Today.ToLongDateString());
 
+    SaveOptions saveOptions;
+
     if (docFormat == "pdf")
     {
-        var pdfSaveOptions = new PdfSaveOptions() { ImageDpi = 220 };
-
-        using var pdfStream = new MemoryStream();
-        var memoryStream = new MemoryStream();
-
-        pdfStream.CopyTo(memoryStream);
-        memoryStream.Position = 0;
-
-        document.Save(memoryStream, pdfSaveOptions);
-
+        var memoryStream = SaveToStream(document, new PdfSaveOptions() { ImageDpi = 220 });
         return Results.File(memoryStream, "application/pdf", "report.pdf");
     }
     else if (docFormat == "html")
     {
-        var HTMLSaveOptions = new HtmlSaveOptions();
+        saveOptions = new HtmlSaveOptions();
 
-        using var htmlStream = new MemoryStream();
-        var memoryStream = new MemoryStream();
-
-        htmlStream.CopyTo(memoryStream);
-        memoryStream.Position = 0;
-
-        document.Save(memoryStream, HTMLSaveOptions);
+        var memoryStream = SaveToStream(document, saveOptions);
 
         return Results.File(memoryStream, "text/html", "report.html");
+
     }
     else
     {
         return Results.BadRequest("the format that you have provided is not supported, try pdf or html.");
     }
+
+    Stream SaveToStream(DocumentModel document, SaveOptions saveOptions)
+    {
+        var memoryStream = new MemoryStream();
+        memoryStream.Position = 0;
+
+        document.Save(memoryStream, saveOptions);
+        return memoryStream;
+    }
+
+
 })
 .WithName("Report")
 .WithOpenApi();
+
 app.Run();
 
