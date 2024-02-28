@@ -42,13 +42,13 @@ namespace MailService.Services
                             Content = new MimeContent(new MemoryStream(attachmentBytes), ContentEncoding.Default),
                             ContentDisposition = new ContentDisposition(ContentDisposition.Attachment),
                             ContentTransferEncoding = ContentEncoding.Base64,
-                            FileName = "report.pdf"
+                            //FileName = "report.pdf"
+                            FileName = mailRequest.Format == "pdf" ? "report.pdf" : "report.html"
                         };
                         builder.Attachments.Add(attachmentContent);
                     }
                 }
             }
-
             email.Body = builder.ToMessageBody();
 
             using var smtp = new SmtpClient();

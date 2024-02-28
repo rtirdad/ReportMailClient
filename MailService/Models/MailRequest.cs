@@ -17,6 +17,8 @@ namespace MailService.Models
 
         public string[] Attachment { get; set; }
 
+        public string Format { get; set; }
+
     }
 }
 

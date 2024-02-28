@@ -27,8 +27,8 @@ var reportJsonContent = JsonDocument.Parse(JsonData);
 
 var reportResult = await reportClient.PostAsJsonAsync("https://localhost:7251/report", reportJsonContent);
 
-//string reportFileName = "report.html";
-/*if (reportResult.IsSuccessStatusCode)
+/*string reportFileName = "report.html";
+if (reportResult.IsSuccessStatusCode)
 {
     if (JsonData.Contains("\"format\": \"pdf\""))
     {
@@ -66,7 +66,8 @@ var emailContent = new
     FromMail = "ronat20003@gmail.com",
     Subject = "Console App Email with Report attachment",
     Body = "Email with attachment",
-    Attachment = new[] { encodedReport }
+    Attachment = new[] { encodedReport },
+    Format = JsonData.Contains("\"format\": \"pdf\"") ? "pdf" : "html"
 };
 
 //byte[] bytes = Encoding.Default.GetBytes(encodedReport);
