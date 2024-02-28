@@ -67,16 +67,14 @@ app.MapPost("/report", (JsonDocument doc, HttpContext context) =>
     else if (docFormat == "html")
     {
         saveOptions = new HtmlSaveOptions();
-
         var memoryStream = SaveToStream(document, saveOptions);
-
         return Results.File(memoryStream, "text/html", "report.html");
-
     }
     else
     {
         return Results.BadRequest("the format that you have provided is not supported, try pdf or html.");
     }
+
 
     Stream SaveToStream(DocumentModel document, SaveOptions saveOptions)
     {

@@ -30,18 +30,23 @@ namespace MailService.Services
             var builder = new BodyBuilder();
             builder.HtmlBody = mailRequest.Body;
 
-            if (!string.IsNullOrEmpty(mailRequest.AttachmentPath) && File.Exists(mailRequest.AttachmentPath))
+            if (mailRequest.Attachment != null)
             {
-                var attachmentContent = new MimePart("application", "pdf")
+                foreach (var attachmentPath in mailRequest.Attachment)
                 {
-                    Content = new MimeContent(File.OpenRead(mailRequest.AttachmentPath), ContentEncoding.Default),
-                    ContentDisposition = new ContentDisposition(ContentDisposition.Attachment),
-                    ContentTransferEncoding = ContentEncoding.Base64,
-                    FileName = Path.GetFileName(mailRequest.AttachmentPath)
-                };
-                builder.Attachments.Add(attachmentContent);
+                    if (!string.IsNullOrEmpty(attachmentPath) && File.Exists(attachmentPath))
+                    {
+                        var attachmentContent = new MimePart("application", "pdf")
+                        {
+                            Content = new MimeContent(File.OpenRead(attachmentPath), ContentEncoding.Default),
+                            ContentDisposition = new ContentDisposition(ContentDisposition.Attachment),
+                            ContentTransferEncoding = ContentEncoding.Base64,
+                            FileName = Path.GetFileName(attachmentPath)
+                        };
+                        builder.Attachments.Add(attachmentContent);
+                    }
+                }
             }
-
             email.Body = builder.ToMessageBody();
 
             using var smtp = new SmtpClient();
@@ -52,5 +57,3 @@ namespace MailService.Services
         }
     }
 }
-
-
