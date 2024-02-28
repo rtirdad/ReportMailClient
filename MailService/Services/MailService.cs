@@ -32,16 +32,17 @@ namespace MailService.Services
 
             if (mailRequest.Attachment != null)
             {
-                foreach (var attachmentPath in mailRequest.Attachment)
+                foreach (var attachmentData in mailRequest.Attachment)
                 {
-                    if (!string.IsNullOrEmpty(attachmentPath) && File.Exists(attachmentPath))
+                    if (!string.IsNullOrEmpty(attachmentData))
                     {
+                        var attachmentBytes = Convert.FromBase64String(attachmentData);
                         var attachmentContent = new MimePart("application", "pdf")
                         {
-                            Content = new MimeContent(File.OpenRead(attachmentPath), ContentEncoding.Default),
+                            Content = new MimeContent(new MemoryStream(attachmentBytes), ContentEncoding.Default),
                             ContentDisposition = new ContentDisposition(ContentDisposition.Attachment),
                             ContentTransferEncoding = ContentEncoding.Base64,
-                            FileName = Path.GetFileName(attachmentPath)
+                            FileName = "report.pdf"
                         };
                         builder.Attachments.Add(attachmentContent);
                     }
