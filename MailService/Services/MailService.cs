@@ -30,18 +30,25 @@ namespace MailService.Services
             var builder = new BodyBuilder();
             builder.HtmlBody = mailRequest.Body;
 
-            if (!string.IsNullOrEmpty(mailRequest.AttachmentPath) && File.Exists(mailRequest.AttachmentPath))
+            if (mailRequest.Attachment != null)
             {
-                var attachmentContent = new MimePart("application", "pdf")
+                foreach (var attachmentData in mailRequest.Attachment)
                 {
-                    Content = new MimeContent(File.OpenRead(mailRequest.AttachmentPath), ContentEncoding.Default),
-                    ContentDisposition = new ContentDisposition(ContentDisposition.Attachment),
-                    ContentTransferEncoding = ContentEncoding.Base64,
-                    FileName = Path.GetFileName(mailRequest.AttachmentPath)
-                };
-                builder.Attachments.Add(attachmentContent);
+                    if (!string.IsNullOrEmpty(attachmentData))
+                    {
+                        var attachmentBytes = Convert.FromBase64String(attachmentData);
+                        var attachmentContent = new MimePart("application", "pdf")
+                        {
+                            Content = new MimeContent(new MemoryStream(attachmentBytes), ContentEncoding.Default),
+                            ContentDisposition = new ContentDisposition(ContentDisposition.Attachment),
+                            ContentTransferEncoding = ContentEncoding.Base64,
+                            //FileName = "report.pdf"
+                            FileName = mailRequest.Format == "pdf" ? "report.pdf" : "report.html"
+                        };
+                        builder.Attachments.Add(attachmentContent);
+                    }
+                }
             }
-
             email.Body = builder.ToMessageBody();
 
             using var smtp = new SmtpClient();
