@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 var reportClient = new HttpClient();
 var JsonData = @"
 {
-  ""format"": ""html"",
+  ""format"": ""pdf"",
   ""template"": ""Letter1"",
   ""data"": 
   { 
@@ -27,23 +27,13 @@ var reportJsonContent = JsonDocument.Parse(JsonData);
 
 var reportResult = await reportClient.PostAsJsonAsync("https://localhost:7251/report", reportJsonContent);
 
-/*string reportFileName = "report.html";
-if (reportResult.IsSuccessStatusCode)
-{
-    if (JsonData.Contains("\"format\": \"pdf\""))
-    {
-        FileName = "report.pdf";
-    }
-}*/
-
-string reportFileName = "report.html"; // Default file name
+string reportFileName = "report.html";
 
 if (reportResult.IsSuccessStatusCode)
 {
-    // Check if the format is "html" in JsonData
     if (JsonData.Contains("\"format\": \"html\""))
     {
-        reportFileName = "report.html"; // Change the file name to "report.html"
+        reportFileName = "report.html";
     }
 }
 
