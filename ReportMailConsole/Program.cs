@@ -27,16 +27,6 @@ var reportJsonContent = JsonDocument.Parse(JsonData);
 
 var reportResult = await reportClient.PostAsJsonAsync("https://localhost:7251/report", reportJsonContent);
 
-string reportFileName = "report.html";
-
-if (reportResult.IsSuccessStatusCode)
-{
-    if (JsonData.Contains("\"format\": \"html\""))
-    {
-        reportFileName = "report.html";
-    }
-}
-
 var emailClient = new HttpClient();
 
 byte[] reportBytes;
