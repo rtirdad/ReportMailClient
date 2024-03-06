@@ -25,7 +25,7 @@ var JsonData = @"
 }";
 var reportJsonContent = JsonDocument.Parse(JsonData);
 
-var reportResult = await reportClient.PostAsJsonAsync("https://localhost:7251/report", reportJsonContent);   hi
+var reportResult = await reportClient.PostAsJsonAsync("https://localhost:7251/report", reportJsonContent);
 
 var emailClient = new HttpClient();
 
