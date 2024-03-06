@@ -818,24 +818,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\CityGIS\\.nuget\\packages\\": {},
-    "C:\\Program Files\\DevExpress 23.2\\Components\\Offline Packages": {}
+    "C:\\Users\\31616\\.nuget\\packages\\": {},
+    "C:\\Program Files\\DevExpress 23.1\\Components\\Offline Packages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\CityGIS\\Desktop\\C#\\ReportMailClient\\MailService\\MailService.csproj",
+      "projectUniqueName": "C:\\Users\\31616\\Desktop\\c#\\ReportMailClient\\MailService\\MailService.csproj",
       "projectName": "MailService",
-      "projectPath": "C:\\Users\\CityGIS\\Desktop\\C#\\ReportMailClient\\MailService\\MailService.csproj",
-      "packagesPath": "C:\\Users\\CityGIS\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\CityGIS\\Desktop\\C#\\ReportMailClient\\MailService\\obj\\",
+      "projectPath": "C:\\Users\\31616\\Desktop\\c#\\ReportMailClient\\MailService\\MailService.csproj",
+      "packagesPath": "C:\\Users\\31616\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\31616\\Desktop\\c#\\ReportMailClient\\MailService\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "C:\\Program Files\\DevExpress 23.2\\Components\\Offline Packages"
+        "C:\\Program Files\\DevExpress 23.1\\Components\\Offline Packages"
       ],
       "configFilePaths": [
-        "C:\\Users\\CityGIS\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 23.2.config",
+        "C:\\Users\\31616\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 23.1.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -843,7 +843,7 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Program Files\\DevExpress 23.2\\Components\\System\\Components\\Packages": {},
+        "C:\\Program Files\\DevExpress 23.1\\Components\\System\\Components\\Packages": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -898,7 +898,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.406\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
       }
     }
   }
