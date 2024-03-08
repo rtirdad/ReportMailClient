@@ -42,7 +42,6 @@ namespace MailService.Services
                             Content = new MimeContent(new MemoryStream(attachmentBytes), ContentEncoding.Default),
                             ContentDisposition = new ContentDisposition(ContentDisposition.Attachment),
                             ContentTransferEncoding = ContentEncoding.Base64,
-                            //FileName = "report.pdf"
                             FileName = mailRequest.Format == "pdf" ? "report.pdf" : "report.html"
                         };
                         builder.Attachments.Add(attachmentContent);

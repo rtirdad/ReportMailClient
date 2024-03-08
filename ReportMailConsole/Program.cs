@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 var reportClient = new HttpClient();
 var JsonData = @"
 {
-  ""format"": ""pdf"",
+  ""format"": ""html"",
   ""template"": ""Letter1"",
   ""data"": 
   { 
