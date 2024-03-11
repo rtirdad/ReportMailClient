@@ -50,6 +50,8 @@ namespace MailService.Services
             }
             email.Body = builder.ToMessageBody();
 
+            //Mail account/port can be changed in appsettings.json
+            //password needs to be an app password in the case of a gmail account, account password will throw errors 
             using var smtp = new SmtpClient();
             smtp.Connect(_mailSettings.Host, _mailSettings.Port, SecureSocketOptions.StartTls);
             smtp.Authenticate(_mailSettings.Mail, _mailSettings.Password);
